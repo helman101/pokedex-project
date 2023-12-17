@@ -1,15 +1,15 @@
-interface PokeState {
+export interface PokeState {
   loading: boolean
   pokemonList: PokemonFromList[]
   nextListUrl?: string
   currentPokemon?: PokemonID | Pokemon
 }
 
-interface PokemonID {
+export interface PokemonID {
   id: number
 }
 
-interface Pokemon {
+export interface Pokemon {
   id: number
   name?: string
   height?: number
@@ -19,19 +19,26 @@ interface Pokemon {
   sprites?: PokeSprites
 }
 
-interface PokemonFromList {
+export interface PokemonFromList {
   name: string
   url: string
 }
 
-interface PokeStat {
+export interface PokeStat {
   name: string
   baseStat: number
 }
 
-interface PokeSprites {
+export interface PokeSprites {
   backDefault: string
   backShiny: string
   frontDefault: string
   frontShiny: string
+}
+
+export enum PokeActions {
+  loading = 'LOADING',
+  setPokemonList = 'SET_POKEMON_LIST',
+  setCurrentPokemon = 'SET_CURRENT_POKEMON',
+  setNextListUrl = 'SET_NEXT_LIST_URL'
 }

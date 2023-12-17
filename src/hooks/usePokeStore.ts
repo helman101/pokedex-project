@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { type PokeState } from '../utils/types'
+import { PokeActions, type PokeState } from '../utils/types'
 
 const initialState: PokeState = {
   loading: false,
@@ -11,14 +11,14 @@ const initialState: PokeState = {
 const reducer = (state: PokeState, action: any): PokeState => {
   const { type } = action
 
-  if (type === 'LOADING') {
+  if (type === PokeActions.loading) {
     return {
       ...state,
       loading: true
     }
   }
 
-  if (type === 'SET_POKEMON_LIST') {
+  if (type === PokeActions.setPokemonList) {
     return {
       ...state,
       loading: false,
@@ -26,7 +26,7 @@ const reducer = (state: PokeState, action: any): PokeState => {
     }
   }
 
-  if (type === 'SET_CURRENT_POKEMON') {
+  if (type === PokeActions.setCurrentPokemon) {
     return {
       ...state,
       loading: false,
@@ -34,7 +34,7 @@ const reducer = (state: PokeState, action: any): PokeState => {
     }
   }
 
-  if (type === 'SET_NEXT_LIST_URL') {
+  if (type === PokeActions.setNextListUrl) {
     return {
       ...state,
       nextListUrl: action.payload
