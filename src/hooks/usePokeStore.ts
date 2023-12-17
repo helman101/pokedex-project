@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { PokeActions, type PokeState } from '../utils/types'
+import { type Action, PokeActions, type PokeState } from '../utils/types'
 
 const initialState: PokeState = {
   loading: false,
@@ -8,7 +8,7 @@ const initialState: PokeState = {
   // currentPokemon
 }
 
-const reducer = (state: PokeState, action: any): PokeState => {
+const reducer = (state: PokeState, action: Action): PokeState => {
   const { type } = action
 
   if (type === PokeActions.loading) {

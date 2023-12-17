@@ -42,3 +42,9 @@ export enum PokeActions {
   setCurrentPokemon = 'SET_CURRENT_POKEMON',
   setNextListUrl = 'SET_NEXT_LIST_URL'
 }
+
+export type Action =
+  | { type: PokeActions.loading }
+  | { type: PokeActions.setCurrentPokemon, payload: Pokemon | PokemonID }
+  | { type: PokeActions.setPokemonList, payload: PokemonFromList[] }
+  | { type: PokeActions.setNextListUrl, payload: string }
