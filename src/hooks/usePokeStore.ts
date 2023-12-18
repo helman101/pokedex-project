@@ -1,5 +1,12 @@
 import { useReducer } from 'react'
-import { type Action, PokeActions, type PokeState } from '../utils/types'
+import {
+  type Action,
+  PokeActions,
+  type PokeState,
+  type PokemonFromList,
+  type PokemonID,
+  type Pokemon
+} from '../utils/types'
 
 const initialState: PokeState = {
   loading: false,
@@ -52,11 +59,25 @@ export const usePokeStore = () => {
     nextListUrl
   }, dispatch] = useReducer(reducer, initialState)
 
+  const setLoading = () => { dispatch({ type: PokeActions.loading }) }
+  const setPokemonList = (pokemonList: PokemonFromList[]) => {
+    dispatch({ type: PokeActions.setPokemonList, payload: pokemonList })
+  }
+  const setCurrentPokemon = (currentPokemon: PokemonID | Pokemon) => {
+    dispatch({ type: PokeActions.setCurrentPokemon, payload: currentPokemon })
+  }
+  const setNextListUrl = (nextListUrl: string) => {
+    dispatch({ type: PokeActions.setNextListUrl, payload: nextListUrl })
+  }
+
   return {
     loading,
     pokemonList,
     currentPokemon,
     nextListUrl,
-    dispatch
+    setLoading,
+    setPokemonList,
+    setCurrentPokemon,
+    setNextListUrl
   }
 }
