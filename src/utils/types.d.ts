@@ -2,7 +2,6 @@ export interface PokeState {
   loadingPokemonList: boolean
   loadingCurrentPokemonData: boolean
   loadingInfinityScroll: boolean
-  currentIndex: number
   pokemonList: PokemonFromList[]
   nextListUrl?: string
   currentPokemon?: PokemonID | Pokemon
@@ -46,7 +45,6 @@ export enum PokeActions {
   setPokemonList = 'SET_POKEMON_LIST',
   setCurrentPokemon = 'SET_CURRENT_POKEMON',
   setNextListUrl = 'SET_NEXT_LIST_URL',
-  setCurrentIndex = 'SET_CURRENT_INDEX'
 }
 
 export type Action =
@@ -59,4 +57,3 @@ export type Action =
   | { type: PokeActions.setNextListUrl, payload: string }
   | { type: PokeActions.setCurrentPokemon, payload: Pokemon | PokemonID }
   | { type: PokeActions.setPokemonList, payload: { append: boolean, pokemonList: PokemonFromList[] } }
-  | { type: PokeActions.setCurrentIndex, payload: number }

@@ -12,7 +12,6 @@ const initialState: PokeState = {
   loadingPokemonList: false,
   loadingInfinityScroll: false,
   loadingCurrentPokemonData: false,
-  currentIndex: 0,
   pokemonList: []
   // nextListUrl
   // currentPokemon
@@ -39,13 +38,6 @@ const reducer = (state: PokeState, action: Action): PokeState => {
     return {
       ...state,
       loadingInfinityScroll: true
-    }
-  }
-
-  if (type === PokeActions.setCurrentIndex) {
-    return {
-      ...state,
-      currentIndex: action.payload
     }
   }
 
@@ -104,9 +96,6 @@ export const usePokeStore = () => {
   const setLoadingInfinityScroll = () => {
     dispatch({ type: PokeActions.setLoadingInfinityScroll })
   }
-  const setCurrentIndex = (currentIndex: number) => {
-    dispatch({ type: PokeActions.setCurrentIndex, payload: currentIndex })
-  }
   const setPokemonList = (append: boolean, pokemonList: PokemonFromList[]) => {
     dispatch({ type: PokeActions.setPokemonList, payload: { append, pokemonList } })
   }
@@ -127,7 +116,6 @@ export const usePokeStore = () => {
     setLoadingPokemonList,
     setLoadingCurrentPokemonData,
     setLoadingInfinityScroll,
-    setCurrentIndex,
     setPokemonList,
     setCurrentPokemon,
     setNextListUrl
