@@ -6,7 +6,7 @@ import {
   type PokemonFromList,
   type PokemonID,
   type Pokemon
-} from '../utils/types'
+} from '../utils/types.d'
 
 const initialState: PokeState = {
   loadingPokemonList: false,
