@@ -1,0 +1,22 @@
+.pokemon-list {
+  width: 600px;
+  height: 430px;
+  overflow-y: scroll;
+}
+
+.btn.pokemon-btn {
+  width: 400px;
+  background: #FDEAB8;
+
+  &:hover {
+    box-shadow: #FDEAB8 0px 0px 50px inset;
+    background: #F49742;
+  }
+}
+
+.btn-wrapper {
+  &:hover {
+    background: #DA4241;
+    border: 5px solid #DA4241;
+  }
+}
