@@ -4,8 +4,10 @@ export interface PokeState {
   loadingInfinityScroll: boolean
   pokemonList: PokemonFromList[]
   nextListUrl?: string
-  currentPokemon?: PokemonID | Pokemon
+  currentPokemon: CurrentPokemon
 }
+
+export type CurrentPokemon = PokemonID | Pokemon
 
 export interface PokemonID {
   id: number
