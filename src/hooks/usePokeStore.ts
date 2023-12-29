@@ -5,16 +5,17 @@ import {
   type PokeState,
   type PokemonFromList,
   type PokemonID,
-  type Pokemon
+  type Pokemon,
+  type usePokeStoreI
 } from '../utils/types.d'
 
-const initialState: PokeState = {
+export const initialState: PokeState = {
   loadingPokemonList: false,
   loadingInfinityScroll: false,
   loadingCurrentPokemonData: false,
-  pokemonList: []
+  pokemonList: [],
   // nextListUrl
-  // currentPokemon
+  currentPokemon: { id: 3 }
 }
 
 const reducer = (state: PokeState, action: Action): PokeState => {
@@ -77,7 +78,7 @@ const reducer = (state: PokeState, action: Action): PokeState => {
   return state
 }
 
-export const usePokeStore = () => {
+export const usePokeStore = (): usePokeStoreI => {
   const [{
     loadingPokemonList,
     loadingCurrentPokemonData,

@@ -49,6 +49,15 @@ export enum PokeActions {
   setNextListUrl = 'SET_NEXT_LIST_URL',
 }
 
+export interface usePokeStoreI extends PokeState {
+  setLoadingPokemonList: () => void
+  setLoadingCurrentPokemonData: () => void
+  setLoadingInfinityScroll: () => void
+  setPokemonList: (append: boolean, pokemonList: PokemonFromList[]) => void
+  setCurrentPokemon: (currentPokemon: PokemonID | Pokemon) => void
+  setNextListUrl: (nextListUrl: string) => void
+}
+
 export type Action =
   | {
     type:
