@@ -2,21 +2,27 @@
   width: 600px;
   height: 430px;
   overflow-y: scroll;
+  background: linear-gradient(180deg, rgba(75,95,174,1) 0%, rgba(90,116,190,1) 25%, rgba(101,139,217,1) 50%, rgba(91,118,192,1) 75%, rgba(75,95,174,1) 100%);
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .btn.pokemon-btn {
   width: 400px;
   background: #FDEAB8;
 
-  &:hover {
+  &.selected, &:hover {
     box-shadow: #FDEAB8 0px 0px 50px inset;
     background: #F49742;
   }
 }
 
 .btn-wrapper {
-  &:hover {
+  &:hover, &.selected {
     background: #DA4241;
-    border: 5px solid #DA4241;
   }
 }
