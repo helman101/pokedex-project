@@ -3,6 +3,7 @@ import { type PokemonFromList } from '../utils/types'
 import { PokemonButton } from './PokemonButton'
 import { PokeContext } from '../Context/PokeContext'
 import { getPokemonListFromUrl } from '../services/pokeApi'
+import { Loader } from './Loader'
 
 interface Props {
   list: PokemonFromList[]
@@ -10,14 +11,15 @@ interface Props {
 }
 
 export const PokemonList = ({ list, loading }: Props) => {
-  const { currentPokemon, nextListUrl, setCurrentPokemon, setPokemonList, setNextListUrl } = useContext(PokeContext)
+  const { loadingInfinityScroll, currentPokemon, nextListUrl, setCurrentPokemon, setPokemonList, setNextListUrl, setLoadingInfinityScroll } = useContext(PokeContext)
   const listRef = useRef<HTMLInputElement>(null)
 
   const listScroll = () => {
     if (listRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listRef.current
-      if (scrollTop + clientHeight >= scrollHeight - 10) {
+      if (scrollTop + clientHeight >= scrollHeight) {
         if (nextListUrl) {
+          setLoadingInfinityScroll()
           void getPokemonListFromUrl(nextListUrl)
             .then((res: { results: PokemonFromList[], next: string }) => {
               setPokemonList(true, res.results)
@@ -35,7 +37,7 @@ export const PokemonList = ({ list, loading }: Props) => {
         onScroll={listScroll}
         ref={listRef}
       >
-        {loading && <p>Loading...</p>}
+        {loading && <Loader />}
         {!loading &&
           list.map((item: PokemonFromList, i: number) =>
             <PokemonButton
@@ -45,6 +47,7 @@ export const PokemonList = ({ list, loading }: Props) => {
               pokemon={item}
               selected={ currentPokemon?.id === i + 1 }/>
           )}
+        {loadingInfinityScroll && <Loader />}
       </div>
     </div>
   )
