@@ -1,3 +1,4 @@
+import { type ItemFromList } from '../utils/types'
 import { BASE_POKE_URL } from './constants'
 import { type ApiListResponse } from './types'
 
@@ -24,4 +25,20 @@ export const getPokemonInfo = async (pokemonId: number) => {
     .then((res) => res)
 
   return info
+}
+
+export const getPokemonTypeList = async () => {
+  const types = await fetch(`${BASE_POKE_URL}type`)
+    .then(async (res) => await res.json())
+    .then((res) => res.results)
+
+  return types.map((type: ItemFromList) => type.name).slice(0, -2)
+}
+
+export const getPokemonGenerationList = async () => {
+  const types = await fetch(`${BASE_POKE_URL}generation`)
+    .then(async (res) => await res.json())
+    .then((res) => res.results)
+
+  return types.map((type: ItemFromList, i: number) => `Gen ${i + 1}`)
 }
