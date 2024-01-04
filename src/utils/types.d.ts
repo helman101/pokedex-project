@@ -2,7 +2,7 @@ export interface PokeState {
   loadingPokemonList: boolean
   loadingCurrentPokemonData: boolean
   loadingInfinityScroll: boolean
-  pokemonList: PokemonFromList[]
+  pokemonList: ItemFromList[]
   nextListUrl?: string
   currentPokemon: CurrentPokemon
 }
@@ -23,7 +23,7 @@ export interface Pokemon {
   sprites?: PokeSprites
 }
 
-export interface PokemonFromList {
+export interface ItemFromList {
   name: string
   url: string
 }
@@ -53,7 +53,7 @@ export interface usePokeStoreI extends PokeState {
   setLoadingPokemonList: () => void
   setLoadingCurrentPokemonData: () => void
   setLoadingInfinityScroll: () => void
-  setPokemonList: (append: boolean, pokemonList: PokemonFromList[]) => void
+  setPokemonList: (append: boolean, pokemonList: ItemFromList[]) => void
   setCurrentPokemon: (currentPokemon: PokemonID | Pokemon) => void
   setNextListUrl: (nextListUrl: string) => void
 }
@@ -67,4 +67,4 @@ export type Action =
   }
   | { type: PokeActions.setNextListUrl, payload: string }
   | { type: PokeActions.setCurrentPokemon, payload: Pokemon | PokemonID }
-  | { type: PokeActions.setPokemonList, payload: { append: boolean, pokemonList: PokemonFromList[] } }
+  | { type: PokeActions.setPokemonList, payload: { append: boolean, pokemonList: ItemFromList[] } }
