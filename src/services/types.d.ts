@@ -1,6 +1,6 @@
-import { type PokemonFromList } from '../utils/types'
+import { type ItemFromList } from '../utils/types'
 
 export interface ApiListResponse {
-  results: PokemonFromList[]
+  results: ItemFromList[]
   next: string
 }

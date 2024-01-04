@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import { PokemonList } from '../Components/PokemonList'
 import '../style.scss'
 import { getFirstPokemonList } from '../services/pokeApi'
-import { type usePokeStoreI, type PokemonFromList } from '../utils/types'
+import { type usePokeStoreI, type ItemFromList } from '../utils/types'
 import { PokeContext } from '../Context/PokeContext'
 
 export const App = () => {
@@ -17,7 +17,7 @@ export const App = () => {
   const getPokemonList = async () => {
     setLoadingPokemonList()
     await getFirstPokemonList()
-      .then((res: { results: PokemonFromList[], next: string }) => {
+      .then((res: { results: ItemFromList[], next: string }) => {
         setPokemonList(false, res.results)
         setNextListUrl(res.next)
       })

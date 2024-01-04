@@ -3,7 +3,7 @@ import {
   type Action,
   PokeActions,
   type PokeState,
-  type PokemonFromList,
+  type ItemFromList,
   type PokemonID,
   type Pokemon,
   type usePokeStoreI
@@ -97,7 +97,7 @@ export const usePokeStore = (): usePokeStoreI => {
   const setLoadingInfinityScroll = () => {
     dispatch({ type: PokeActions.setLoadingInfinityScroll })
   }
-  const setPokemonList = (append: boolean, pokemonList: PokemonFromList[]) => {
+  const setPokemonList = (append: boolean, pokemonList: ItemFromList[]) => {
     dispatch({ type: PokeActions.setPokemonList, payload: { append, pokemonList } })
   }
   const setCurrentPokemon = (currentPokemon: PokemonID | Pokemon) => {
