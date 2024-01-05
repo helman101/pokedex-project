@@ -54,7 +54,7 @@ export interface usePokeStoreI extends PokeState {
   setLoadingCurrentPokemonData: () => void
   setLoadingInfinityScroll: () => void
   setPokemonList: (append: boolean, pokemonList: ItemFromList[]) => void
-  setCurrentPokemon: (currentPokemon: PokemonID | Pokemon) => void
+  setCurrentPokemon: (currentPokemon: CurrentPokemon) => void
   setNextListUrl: (nextListUrl: string) => void
 }
 

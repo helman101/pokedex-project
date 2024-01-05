@@ -4,9 +4,8 @@ import {
   PokeActions,
   type PokeState,
   type ItemFromList,
-  type PokemonID,
-  type Pokemon,
-  type usePokeStoreI
+  type usePokeStoreI,
+  type CurrentPokemon
 } from '../utils/types.d'
 
 export const initialState: PokeState = {
@@ -100,7 +99,7 @@ export const usePokeStore = (): usePokeStoreI => {
   const setPokemonList = (append: boolean, pokemonList: ItemFromList[]) => {
     dispatch({ type: PokeActions.setPokemonList, payload: { append, pokemonList } })
   }
-  const setCurrentPokemon = (currentPokemon: PokemonID | Pokemon) => {
+  const setCurrentPokemon = (currentPokemon: CurrentPokemon) => {
     dispatch({ type: PokeActions.setCurrentPokemon, payload: currentPokemon })
   }
   const setNextListUrl = (nextListUrl: string) => {
