@@ -45,7 +45,7 @@ export const getPokemonTypeList = async () => {
       }))
     .slice(0, -2)
 
-  return [{ name: 'Select type', value: 'all' }, ...result]
+  return result
 }
 
 // Gets a list of pokemon generations
@@ -57,7 +57,7 @@ export const getPokemonGenerationList = async () => {
   // Maps through array generating an array of objects containing a name and a value
   const result = gens.map((gen: ItemFromList, i: number) => ({ name: `Gen ${i + 1}`, value: gen.name }))
 
-  return [{ name: 'Select generation', value: 'all' }, ...result]
+  return result
 }
 
 // Gets a list of pokemon by generation
@@ -70,7 +70,7 @@ export const getPokemonListByGen = async (gen: string) => {
 }
 
 // Gets a list of pokemon by type
-export const getPokemonListBytype = async (type: string) => {
+export const getPokemonListByType = async (type: string) => {
   const pokeList = await fetch(`${BASE_POKE_URL}type/${type}`)
     .then(async (res) => await res.json())
     .then((res) => res.pokemon)
