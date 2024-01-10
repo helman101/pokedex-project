@@ -102,7 +102,7 @@ export const usePokeStore = (): usePokeStoreI => {
   const setCurrentPokemon = (currentPokemon: CurrentPokemon) => {
     dispatch({ type: PokeActions.setCurrentPokemon, payload: currentPokemon })
   }
-  const setNextListUrl = (nextListUrl: string) => {
+  const setNextListUrl = (nextListUrl?: string) => {
     dispatch({ type: PokeActions.setNextListUrl, payload: nextListUrl })
   }
 
