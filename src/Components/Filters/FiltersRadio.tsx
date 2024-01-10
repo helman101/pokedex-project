@@ -1,9 +1,9 @@
-import pokeballChecked from '../assets/pokeball-checked.png'
-import pokeball from '../assets/pokeball.png'
+import pokeballChecked from '../../assets/pokeball-checked.png'
+import pokeball from '../../assets/pokeball.png'
 
 interface Props {
   isCheck: boolean
-  filterName: 'all' | 'gen' | 'type'
+  filterName: string
   onChange: () => void
 }
 
@@ -17,7 +17,7 @@ export const FiltersRadio = ({ isCheck, filterName, onChange }: Props) => {
         id={`${filterName}Filter`}
         onChange={onChange}
       />
-      <label htmlFor={`${filterName}Filter`} className='d-flex align-items-center'>
+      <label htmlFor={`${filterName}Filter`} className='d-flex align-items-baseline'>
         <img
           className='me-1'
           src={isCheck ? pokeballChecked : pokeball}
