@@ -1,5 +1,6 @@
-import React from 'react'
 import { type ItemFromList } from '../utils/types'
+import pokeballChecked from '../assets/pokeball-checked.png'
+import pokeball from '../assets/pokeball.png'
 
 interface Props {
   id: number
@@ -15,7 +16,12 @@ export const PokemonButton = ({ id, pokemon, selected, onClick }: Props) => {
         className={`${selected ? 'selected' : ''} pokemon-btn btn game-font d-flex align-items-center py-4 px-3 rounded w-100`}
         onClick={onClick}
         >
-        <small className='mb-0'>{`N°${id}`}</small>
+        <img
+          className='me-1'
+          src={selected ? pokeballChecked : pokeball}
+          alt="pokeball"
+          width={30}
+        />
         <div className='flex-fill'>
           <small className='mb-0'>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</small>
         </div>
