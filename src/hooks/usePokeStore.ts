@@ -3,18 +3,18 @@ import {
   type Action,
   PokeActions,
   type PokeState,
-  type PokemonFromList,
-  type PokemonID,
-  type Pokemon
-} from '../utils/types'
+  type ItemFromList,
+  type usePokeStoreI,
+  type CurrentPokemon
+} from '../utils/types.d'
 
-const initialState: PokeState = {
+export const initialState: PokeState = {
   loadingPokemonList: false,
   loadingInfinityScroll: false,
   loadingCurrentPokemonData: false,
-  pokemonList: []
+  pokemonList: [],
   // nextListUrl
-  // currentPokemon
+  currentPokemon: { id: 3 }
 }
 
 const reducer = (state: PokeState, action: Action): PokeState => {
@@ -77,7 +77,7 @@ const reducer = (state: PokeState, action: Action): PokeState => {
   return state
 }
 
-export const usePokeStore = () => {
+export const usePokeStore = (): usePokeStoreI => {
   const [{
     loadingPokemonList,
     loadingCurrentPokemonData,
@@ -96,13 +96,13 @@ export const usePokeStore = () => {
   const setLoadingInfinityScroll = () => {
     dispatch({ type: PokeActions.setLoadingInfinityScroll })
   }
-  const setPokemonList = (append: boolean, pokemonList: PokemonFromList[]) => {
+  const setPokemonList = (append: boolean, pokemonList: ItemFromList[]) => {
     dispatch({ type: PokeActions.setPokemonList, payload: { append, pokemonList } })
   }
-  const setCurrentPokemon = (currentPokemon: PokemonID | Pokemon) => {
+  const setCurrentPokemon = (currentPokemon: CurrentPokemon) => {
     dispatch({ type: PokeActions.setCurrentPokemon, payload: currentPokemon })
   }
-  const setNextListUrl = (nextListUrl: string) => {
+  const setNextListUrl = (nextListUrl?: string) => {
     dispatch({ type: PokeActions.setNextListUrl, payload: nextListUrl })
   }
 

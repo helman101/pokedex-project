@@ -1,0 +1,87 @@
+$light-orange: #FDEAB8;
+$light-blue: #85B6EF;
+$white: #F0F6F6;
+$yellow: #F7DC65;
+$orange: #F49742;
+$red: #DA4241;
+
+.pokemon-list {
+  width: 600px;
+  height: 430px;
+  background: linear-gradient(180deg, rgba(75,95,174,1) 0%, rgba(90,116,190,1) 25%, rgba(101,139,217,1) 50%, rgba(91,118,192,1) 75%, rgba(75,95,174,1) 100%);
+}
+
+.pokemon-col {
+  height: inherit;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  gap: 0.1rem 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.btn.pokemon-btn, .btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+  background: $light-orange;
+  gap: 0.5rem;
+
+  &.selected, &:hover, &:active {
+    box-shadow: $light-orange 0px 0px 20px inset;
+    background-color: $orange;
+  }
+}
+
+.btn-wrapper {
+  &:hover, &.selected {
+    background: $red;
+  }
+}
+
+.loader {
+  width: 2rem;
+  min-height: 2rem;
+  border: 5px solid $orange;
+  border-right-color: transparent;
+  animation: 0.75s linear infinite loading;
+  transform: rotate(0);
+}
+
+.filters-wrapper {
+  background-color: $yellow;
+  border: 7px solid $yellow;
+
+  & > .filters {
+    background-color: $white;
+    border: 5px solid $light-blue;
+    & > select {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.poke-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  & + img {
+    cursor: pointer;
+  }
+}
+
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}

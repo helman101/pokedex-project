@@ -18,11 +18,13 @@
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.33.2",
+    "sass": "^1.69.5",
     "typescript": "*",
     "vite": "^5.0.8"
   },
   "dependencies": {
     "@vitejs/plugin-react": "4.2.1",
+    "bootstrap": "5.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   }
