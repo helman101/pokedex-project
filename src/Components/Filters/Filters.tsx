@@ -1,15 +1,24 @@
-import React, { type ChangeEvent, useEffect, useState, useContext } from 'react'
+import React, { type ChangeEvent, useEffect, useContext } from 'react'
 import { getFirstPokemonList, getPokemonGenerationList, getPokemonListByGen, getPokemonListByType, getPokemonTypeList } from '../../services/pokeApi'
 import { FiltersRadio } from './FiltersRadio'
-import { FiltersEnum, type FilterNames } from './types.d'
+import { FiltersEnum } from '../../hooks/FilterStore/types.d'
 import { type ItemFromList, type usePokeStoreI } from '../../utils/types'
 import { PokeContext } from '../../Context/PokeContext'
+import { useFilterStore } from '../../hooks/FilterStore/useFilterStore'
 
 export const Filters = () => {
-  const [genList, setGenList] = useState<Array<{ value: string, name: string }>>([])
-  const [typeList, setTypeList] = useState<Array<{ value: string, name: string }>>([])
-  const [filters, setFilters] = useState<{ genFilter: string, typeFilter: string }>({ genFilter: 'generation-i', typeFilter: 'normal' })
-  const [checkedFilter, setCheckedFilter] = useState<FilterNames>(FiltersEnum.all)
+  const {
+    typeFilter,
+    genFilter,
+    typeList,
+    genList,
+    checkedFilter,
+    setTypeList,
+    setGenList,
+    setGenFilter,
+    setTypeFilter,
+    setCheckedFilter
+  } = useFilterStore()
 
   const {
     setLoadingPokemonList,
@@ -28,7 +37,7 @@ export const Filters = () => {
 
   const getPokemonByType = async () => {
     setLoadingPokemonList()
-    await getPokemonListByType(filters.typeFilter)
+    await getPokemonListByType(typeFilter)
       .then((res: ItemFromList[]) => {
         setPokemonList(false, res)
         setNextListUrl(undefined)
@@ -37,7 +46,7 @@ export const Filters = () => {
 
   const getPokemonByGen = async () => {
     setLoadingPokemonList()
-    await getPokemonListByGen(filters.genFilter)
+    await getPokemonListByGen(genFilter)
       .then((res: ItemFromList[]) => {
         setPokemonList(false, res)
         setNextListUrl(undefined)
@@ -61,71 +70,67 @@ export const Filters = () => {
     if (checkedFilter === FiltersEnum.type) {
       void getPokemonByType()
     }
-  }, [checkedFilter, filters])
+  }, [checkedFilter, typeFilter, genFilter])
 
   return (
     <div className='game-font h-100 d-flex align-items-center justify-content-center'>
       <div className="filters-wrapper rounded-3">
-        <div className='filters px-3 py-5 rounded-3'>
-          <h2 className='mb-4 text-center'>Filters</h2>
-          <div className='mb-2 mt-3'>
-            <FiltersRadio
-              filterName={FiltersEnum.all}
-              isCheck={checkedFilter === FiltersEnum.all}
-              onChange={() => { setCheckedFilter(FiltersEnum.all) }}
-            />
-            <FiltersRadio
-              filterName={FiltersEnum.type}
-              isCheck={checkedFilter === FiltersEnum.type}
-              onChange={() => { setCheckedFilter(FiltersEnum.type) }}
-            />
-            {checkedFilter === 'type' && (
-              <select
-                className="form-select"
-                id="floatingSelect"
-                aria-label="Floating label select example"
-                value={filters.typeFilter}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    typeFilter: e.target.value
-                  }))
-                }}
-              >
-                {typeList.map((type, i) =>
-                  <option key={i} value={type.value}>
-                    {type.name}
-                  </option>
-                )}
-              </select>
-            )}
-          </div>
-          <div>
-            <FiltersRadio
-              filterName={FiltersEnum.generation}
-              isCheck={checkedFilter === FiltersEnum.generation}
-              onChange={() => { setCheckedFilter(FiltersEnum.generation) }}
-            />
-            {checkedFilter === FiltersEnum.generation && (
-              <select
-                className="form-select"
-                id="floatingSelect"
-                aria-label="Floating label select example"
-                value={filters.genFilter}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    genFilter: e.target.value
-                  }))
-                }}
-              >
-                {genList.map((gen, i) =>
-                  <option key={i} value={gen.value}>
-                    {gen.name}
-                  </option>
-                )}
-              </select>
-            )}
+        <div className='filters px-2 py-5 rounded-3'>
+          <div className='px-1'>
+            <h3 className='mb-4 text-center'>Filters</h3>
+            <div className='mb-2 mt-3'>
+              <FiltersRadio
+                filterName={FiltersEnum.all}
+                isCheck={checkedFilter === FiltersEnum.all}
+                onChange={() => { setCheckedFilter(FiltersEnum.all) }}
+              />
+              <FiltersRadio
+                filterName={FiltersEnum.type}
+                isCheck={checkedFilter === FiltersEnum.type}
+                onChange={() => { setCheckedFilter(FiltersEnum.type) }}
+              />
+              {checkedFilter === 'type' && (
+                <select
+                  className="form-select"
+                  id="floatingSelect"
+                  aria-label="Floating label select example"
+                  value={typeFilter}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    setTypeFilter(e.target.value)
+                  }}
+                >
+                  {typeList.map((type, i) =>
+                    <option key={i} value={type.value}>
+                      {type.name}
+                    </option>
+                  )}
+                </select>
+              )}
+            </div>
+            <div>
+              <FiltersRadio
+                filterName={FiltersEnum.generation}
+                isCheck={checkedFilter === FiltersEnum.generation}
+                onChange={() => { setCheckedFilter(FiltersEnum.generation) }}
+              />
+              {checkedFilter === FiltersEnum.generation && (
+                <select
+                  className="form-select"
+                  id="floatingSelect"
+                  aria-label="Floating label select example"
+                  value={genFilter}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    setGenFilter(e.target.value)
+                  }}
+                >
+                  {genList.map((gen, i) =>
+                    <option key={i} value={gen.value}>
+                      {gen.name}
+                    </option>
+                  )}
+                </select>
+              )}
+            </div>
           </div>
         </div>
       </div>
