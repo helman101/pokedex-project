@@ -58,7 +58,7 @@ export interface usePokeStoreI extends PokeState {
   setNextListUrl: (nextListUrl?: string) => void
 }
 
-export type Action =
+export type PokeStoreAction =
   | {
     type:
     | PokeActions.setLoadingPokemonList
@@ -66,5 +66,5 @@ export type Action =
     | PokeActions.setLoadingInfinityScroll
   }
   | { type: PokeActions.setNextListUrl, payload?: string }
-  | { type: PokeActions.setCurrentPokemon, payload: Pokemon | PokemonID }
+  | { type: PokeActions.setCurrentPokemon, payload: CurrentPokemon }
   | { type: PokeActions.setPokemonList, payload: { append: boolean, pokemonList: ItemFromList[] } }
