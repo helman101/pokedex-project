@@ -1,4 +1,4 @@
-import { type ItemFromList } from '../utils/types'
+import { type ItemFromList } from '../hooks/PokeStore/types'
 import pokeballChecked from '../assets/pokeball-checked.png'
 import pokeball from '../assets/pokeball.png'
 

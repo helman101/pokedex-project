@@ -1,4 +1,4 @@
-import { type ItemFromList } from '../utils/types'
+import { type ItemFromList } from '../hooks/PokeStore/types'
 import { BASE_POKE_URL } from './constants'
 import { type ApiListResponse } from './types'
 

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from 'react'
-import { type ItemFromList } from '../utils/types'
+import { type ItemFromList } from '../hooks/PokeStore/types'
 import { PokemonButton } from './PokemonButton'
 import { PokeContext } from '../Context/PokeContext'
 import { getPokemonListFromUrl } from '../services/pokeApi'

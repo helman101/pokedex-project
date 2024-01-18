@@ -2,7 +2,7 @@ import React, { type ChangeEvent, useEffect, useContext } from 'react'
 import { getFirstPokemonList, getPokemonGenerationList, getPokemonListByGen, getPokemonListByType, getPokemonTypeList } from '../../services/pokeApi'
 import { FiltersRadio } from './FiltersRadio'
 import { FiltersEnum } from '../../hooks/FilterStore/types.d'
-import { type ItemFromList, type usePokeStoreI } from '../../utils/types'
+import { type ItemFromList, type usePokeStoreI } from '../../hooks/PokeStore/types'
 import { PokeContext } from '../../Context/PokeContext'
 import { useFilterStore } from '../../hooks/FilterStore/useFilterStore'
 
