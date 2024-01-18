@@ -6,7 +6,7 @@ import {
   type ItemFromList,
   type usePokeStoreI,
   type CurrentPokemon
-} from './types'
+} from './types.d'
 
 export const initialState: PokeState = {
   loadingPokemonList: false,
