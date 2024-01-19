@@ -1,10 +1,11 @@
 import { useContext, useEffect, useRef } from 'react'
-import { type ItemFromList } from '../hooks/PokeStore/types'
-import { PokemonButton } from './PokemonButton'
-import { PokeContext } from '../Context/PokeContext'
-import { getPokemonListFromUrl } from '../services/pokeApi'
-import { Loader } from './Loader'
-import { Filters } from './Filters/Filters'
+import { type ItemFromList } from '../../hooks/PokeStore/types'
+import { PokemonButton } from '../PokemonButton/PokemonButton'
+import { PokeContext } from '../../Context/PokeContext'
+import { getPokemonListFromUrl } from '../../services/pokeApi'
+import { Loader } from '../Loader/Loader'
+import { Filters } from '../Filters/Filters'
+import styles from './style.module.scss'
 
 interface Props {
   list: ItemFromList[]
@@ -50,9 +51,9 @@ export const PokemonList = ({ list, loading }: Props) => {
 
   return (
     <div className='w-100 d-flex justify-content-center'>
-      <div className='row pokemon-list rounded'>
+      <div className={`row screen ${styles.pokemonList} rounded`}>
         <div
-          className='col-6 pokemon-col pt-2 d-flex flex-column align-items-center position-relative'
+          className={`col-6 ${styles.pokemonCol} pt-2 d-flex flex-column align-items-center position-relative`}
           onScroll={listScroll}
           ref={listRef}
         >

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { PokemonList } from '../Components/PokemonList'
+import { PokemonList } from '../Components/PokemonList/PokemonList'
 import '../style.scss'
 import { type usePokeStoreI } from '../hooks/PokeStore/types'
 import { PokeContext } from '../Context/PokeContext'

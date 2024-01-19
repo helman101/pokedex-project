@@ -1,10 +1,11 @@
-import React, { type ChangeEvent, useEffect, useContext } from 'react'
+import { type ChangeEvent, useEffect, useContext } from 'react'
 import { getFirstPokemonList, getPokemonGenerationList, getPokemonListByGen, getPokemonListByType, getPokemonTypeList } from '../../services/pokeApi'
 import { FiltersRadio } from './FiltersRadio'
 import { FiltersEnum } from '../../hooks/FilterStore/types.d'
 import { type ItemFromList, type usePokeStoreI } from '../../hooks/PokeStore/types'
 import { PokeContext } from '../../Context/PokeContext'
 import { useFilterStore } from '../../hooks/FilterStore/useFilterStore'
+import styles from './styles.module.scss'
 
 export const Filters = () => {
   const {
@@ -74,8 +75,8 @@ export const Filters = () => {
 
   return (
     <div className='game-font h-100 d-flex align-items-center justify-content-center'>
-      <div className="filters-wrapper rounded-3">
-        <div className='filters px-2 py-5 rounded-3'>
+      <div className={`${styles.filtersWrapper} rounded-3`}>
+        <div className={`${styles.filters} px-2 py-5 rounded-3`}>
           <div className='px-1'>
             <h3 className='mb-4 text-center'>Filters</h3>
             <div className='mb-2 mt-3'>

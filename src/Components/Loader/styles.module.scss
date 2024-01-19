@@ -1,0 +1,24 @@
+@import '../../assets/styles/palette';
+
+.loader {
+  width: 2rem;
+  min-height: 2rem;
+  border: 5px solid $orange;
+  border-right-color: transparent;
+  animation: 0.75s linear infinite loading;
+  transform: rotate(0);
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
