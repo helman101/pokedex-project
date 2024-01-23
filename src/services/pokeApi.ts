@@ -22,10 +22,25 @@ export const getPokemonListFromUrl = async (url: string) => {
 }
 
 // Gets all info of a selected pokemon
-export const getPokemonInfo = async (pokemonId: number) => {
-  const info = await fetch(`${BASE_POKE_URL}pokemon/${pokemonId}`)
+export const getPokemonInfo = async (pokemonName: string) => {
+  const info = await fetch(`${BASE_POKE_URL}pokemon/${pokemonName}`)
     .then(async (res) => await res.json())
-    .then((res) => res)
+    .then((res) => {
+      return {
+        id: res.id,
+        name: res.name,
+        height: res.height,
+        weight: res.weight,
+        types: res.types.map((obj: { type: ItemFromList }) => obj.type.name),
+        stats: res.stats.map((obj: { stat: ItemFromList, base_stat: number }) => ({ name: obj.stat.name, baseStat: obj.base_stat })),
+        sprites: {
+          backDefault: res.sprites.back_default,
+          backShiny: res.sprites.back_shiny,
+          frontDefault: res.sprites.front_default,
+          frontShiny: res.sprites.front_shiny
+        }
+      }
+    })
 
   return info
 }
