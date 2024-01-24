@@ -43,11 +43,11 @@ export const PokemonList = ({ list, loading }: Props) => {
   }
 
   useEffect(() => {
-    if (loadingPokemonList) {
+    if (!loadingPokemonList && list.length > 0) {
       listRef.current?.scrollTo({ top: 0 })
-      setCurrentPokemon({ id: 1 })
+      setCurrentPokemon({ name: list[0].name })
     }
-  }, [loadingPokemonList])
+  }, [loadingPokemonList, list])
 
   return (
     <div className='w-100 d-flex justify-content-center'>
@@ -63,9 +63,9 @@ export const PokemonList = ({ list, loading }: Props) => {
                 <PokemonButton
                   key={i}
                   id={i + 1}
-                  onClick={() => { setCurrentPokemon({ id: i + 1 }) } }
+                  onClick={() => { setCurrentPokemon({ name: item.name }) } }
                   pokemon={item}
-                  selected={ currentPokemon?.id === i + 1 }/>
+                  selected={ currentPokemon.name === item.name }/>
               )}
             {loadingInfinityScroll && <Loader />}
         </div>

@@ -14,7 +14,7 @@ export const initialState: PokeState = {
   loadingCurrentPokemonData: false,
   pokemonList: [],
   // nextListUrl
-  currentPokemon: { id: 3 }
+  currentPokemon: { name: 'bulbasaur' }
 }
 
 const reducer = (state: PokeState, action: PokeStoreAction): PokeState => {
