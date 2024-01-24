@@ -31,7 +31,7 @@ export const getPokemonInfo = async (pokemonName: string) => {
         name: res.name,
         height: res.height,
         weight: res.weight,
-        types: res.types.map((obj: { type: ItemFromList }) => obj.type.name),
+        types: res.types.map((obj: { type: ItemFromList }) => obj.type.name.charAt(0).toLocaleUpperCase() + obj.type.name.slice(1)),
         stats: res.stats.map((obj: { stat: ItemFromList, base_stat: number }) => ({ name: obj.stat.name, baseStat: obj.base_stat })),
         sprites: {
           backDefault: res.sprites.back_default,
