@@ -13,16 +13,21 @@
       $white 25px
     );
 
-    .pokeImg {
-      image-rendering: pixelated;
-      background-size: 100% 100%;
-      width: 100%;
-      height: auto;
+    .pokeImgWrapper {
+      background-color: $ligther-blue;
+      width: 220px;
+      height: 220px;
+
+      .pokeImg {
+        image-rendering: pixelated;
+        background-size: 100% 100%;
+        width: 100%;
+        height: auto;
+      }
     }
 
     .stats {
-      box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 10px;
-      ;
+      background-color: $ligther-blue;
     }
   }
 }
