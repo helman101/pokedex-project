@@ -1,7 +1,11 @@
 import style from './styles.module.scss'
 
-export const Loader = () => {
+interface PropType {
+  color: string
+}
+
+export const Loader = ({ color }: PropType) => {
   return (
-    <div className={`${style.loader} rounded-circle my-3`} />
+    <div className={`${style.loader} ${style[color]} rounded-circle my-3`} />
   )
 }
