@@ -6,7 +6,7 @@ import {
   type ItemFromList,
   type usePokeStoreI,
   type CurrentPokemon
-} from '../utils/types.d'
+} from './types.d'
 
 export const initialState: PokeState = {
   loadingPokemonList: false,
@@ -14,7 +14,7 @@ export const initialState: PokeState = {
   loadingCurrentPokemonData: false,
   pokemonList: [],
   // nextListUrl
-  currentPokemon: { id: 3 }
+  currentPokemon: { name: 'bulbasaur' }
 }
 
 const reducer = (state: PokeState, action: PokeStoreAction): PokeState => {

@@ -1,6 +1,6 @@
-import { type ItemFromList } from '../utils/types'
-import pokeballChecked from '../assets/pokeball-checked.png'
-import pokeball from '../assets/pokeball.png'
+import { type ItemFromList } from '../../hooks/PokeStore/types.d'
+import pokeballChecked from '../../assets/pokeball-checked.png'
+import pokeball from '../../assets/pokeball.png'
 
 interface Props {
   id: number

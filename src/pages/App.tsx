@@ -1,8 +1,9 @@
 import { useContext } from 'react'
-import { PokemonList } from '../Components/PokemonList'
+import { PokemonList } from '../Components/PokemonList/PokemonList'
 import '../style.scss'
-import { type usePokeStoreI } from '../utils/types'
+import { type usePokeStoreI } from '../hooks/PokeStore/types'
 import { PokeContext } from '../Context/PokeContext'
+import { PokemonInfo } from '../Components/PokemonInfo/PokemonInfo'
 
 export const App = () => {
   const {
@@ -11,7 +12,10 @@ export const App = () => {
   } = useContext<usePokeStoreI>(PokeContext)
 
   return (
-    <main>
+    <main className='game-font'>
+      <section>
+        <PokemonInfo />
+      </section>
       <section>
         <PokemonList
           loading={loadingPokemonList}

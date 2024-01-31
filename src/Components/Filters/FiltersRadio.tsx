@@ -1,5 +1,6 @@
 import pokeballChecked from '../../assets/pokeball-checked.png'
 import pokeball from '../../assets/pokeball.png'
+import styles from './styles.module.scss'
 
 interface Props {
   isCheck: boolean
@@ -12,7 +13,7 @@ export const FiltersRadio = ({ isCheck, filterName, onChange }: Props) => {
     <div className="form-check ps-0">
       <input
         type="radio"
-        className='form-check-input poke-radio'
+        className={`form-check-input ${styles.pokeRadio}`}
         name='filters'
         id={`${filterName}Filter`}
         onChange={onChange}

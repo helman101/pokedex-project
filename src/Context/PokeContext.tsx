@@ -1,6 +1,6 @@
 import { type ReactNode, createContext } from 'react'
-import { initialState, usePokeStore } from '../hooks/usePokeStore'
-import { type usePokeStoreI } from '../utils/types'
+import { initialState, usePokeStore } from '../hooks/PokeStore/usePokeStore'
+import { type usePokeStoreI } from '../hooks/PokeStore/types'
 
 export const PokeContext = createContext<usePokeStoreI>({
   setLoadingPokemonList: () => {},

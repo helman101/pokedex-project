@@ -7,15 +7,15 @@ export interface PokeState {
   currentPokemon: CurrentPokemon
 }
 
-export type CurrentPokemon = PokemonID | Pokemon
+export type CurrentPokemon = Pokemon
 
-export interface PokemonID {
-  id: number
+export interface PokemonName {
+  name: string
 }
 
 export interface Pokemon {
-  id: number
-  name?: string
+  id?: number
+  name: string
   height?: number
   weight?: number
   types?: string[]

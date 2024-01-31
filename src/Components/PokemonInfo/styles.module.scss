@@ -1,0 +1,35 @@
+@import '../../assets/styles/palette.scss';
+
+.pokeInfoWrapper {
+  background-color: #F7DC65;
+  border: 7px solid #F7DC65;
+
+  .pokeInfo {
+    border: 5px solid #85B6EF;
+    background: repeating-linear-gradient(
+      $ligther-blue,
+      $ligther-blue 10px,
+      $white 10px,
+      $white 25px
+    );
+
+    .pokeImgWrapper {
+      background-color: $ligther-blue;
+      width: 220px;
+      height: 220px;
+
+      .pokeImg {
+        image-rendering: pixelated;
+        background-size: 100% 100%;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .stats {
+      min-width: 328px;
+      min-height: 275px;
+      background-color: $ligther-blue;
+    }
+  }
+}

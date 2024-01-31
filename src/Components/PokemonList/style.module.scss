@@ -1,0 +1,15 @@
+.pokemonList {
+  background: linear-gradient(180deg, rgba(75,95,174,1) 0%, rgba(90,116,190,1) 25%, rgba(101,139,217,1) 50%, rgba(91,118,192,1) 75%, rgba(75,95,174,1) 100%);
+}
+
+.pokemonCol {
+  height: inherit;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  gap: 0.1rem 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

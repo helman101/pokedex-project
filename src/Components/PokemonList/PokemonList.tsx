@@ -1,10 +1,11 @@
 import { useContext, useEffect, useRef } from 'react'
-import { type ItemFromList } from '../utils/types'
-import { PokemonButton } from './PokemonButton'
-import { PokeContext } from '../Context/PokeContext'
-import { getPokemonListFromUrl } from '../services/pokeApi'
-import { Loader } from './Loader'
-import { Filters } from './Filters/Filters'
+import { type ItemFromList } from '../../hooks/PokeStore/types'
+import { PokemonButton } from '../PokemonButton/PokemonButton'
+import { PokeContext } from '../../Context/PokeContext'
+import { getPokemonListFromUrl } from '../../services/pokeApi'
+import { Loader } from '../Loader/Loader'
+import { Filters } from '../Filters/Filters'
+import styles from './style.module.scss'
 
 interface Props {
   list: ItemFromList[]
@@ -42,17 +43,17 @@ export const PokemonList = ({ list, loading }: Props) => {
   }
 
   useEffect(() => {
-    if (loadingPokemonList) {
+    if (!loadingPokemonList && list.length > 0) {
       listRef.current?.scrollTo({ top: 0 })
-      setCurrentPokemon({ id: 1 })
+      setCurrentPokemon({ name: list[0].name })
     }
-  }, [loadingPokemonList])
+  }, [loadingPokemonList, list])
 
   return (
     <div className='w-100 d-flex justify-content-center'>
-      <div className='row pokemon-list rounded'>
+      <div className={`row screen ${styles.pokemonList} rounded`}>
         <div
-          className='col-6 pokemon-col pt-2 d-flex flex-column align-items-center position-relative'
+          className={`col-6 ${styles.pokemonCol} pt-2 d-flex flex-column align-items-center position-relative`}
           onScroll={listScroll}
           ref={listRef}
         >
@@ -62,9 +63,9 @@ export const PokemonList = ({ list, loading }: Props) => {
                 <PokemonButton
                   key={i}
                   id={i + 1}
-                  onClick={() => { setCurrentPokemon({ id: i + 1 }) } }
+                  onClick={() => { setCurrentPokemon({ name: item.name }) } }
                   pokemon={item}
-                  selected={ currentPokemon?.id === i + 1 }/>
+                  selected={ currentPokemon.name === item.name }/>
               )}
             {loadingInfinityScroll && <Loader />}
         </div>
