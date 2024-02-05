@@ -4,6 +4,8 @@ import { getPokemonInfo } from '../../services/pokeApi'
 import { type CurrentPokemon, type usePokeStoreI } from '../../hooks/PokeStore/types'
 import { PokeContext } from '../../Context/PokeContext'
 import { Loader } from '../Loader/Loader'
+import PokemonTypes from '../../assets/pokemon_Types.png'
+import { getTypeImagePosition } from './constants'
 
 export const PokemonInfo = () => {
   const {
@@ -61,10 +63,10 @@ export const PokemonInfo = () => {
                             </tr>
                             <tr>
                               <th>Types</th>
-                              <td className='d-flex justify-content-end flex-wrap' style={{ gap: '0.5rem' }}>
+                              <td className='d-flex justify-content-end flex-wrap' style={{ gap: '0.1rem' }}>
                                 {currentPokemon.types?.map(
                                   (type: string, i: number) => (
-                                    <span key={i}>{type}</span>
+                                    <div className={styles.typeImage} key={i} style={{ backgroundImage: `url(${PokemonTypes})`, ...getTypeImagePosition[type.toLocaleLowerCase()] }} />
                                   )
                                 )}
                               </td>
