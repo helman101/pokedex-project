@@ -57,7 +57,7 @@ export const PokemonList = ({ list, loading }: Props) => {
           onScroll={listScroll}
           ref={listRef}
         >
-            {loading && <Loader />}
+            {loading && <Loader color='orange' />}
             {!loading &&
               list.map((item: ItemFromList, i: number) =>
                 <PokemonButton
@@ -67,7 +67,7 @@ export const PokemonList = ({ list, loading }: Props) => {
                   pokemon={item}
                   selected={ currentPokemon.name === item.name }/>
               )}
-            {loadingInfinityScroll && <Loader />}
+            {loadingInfinityScroll && <Loader color='orange' />}
         </div>
         <div className='col'>
           <Filters />
