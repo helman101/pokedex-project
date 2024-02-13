@@ -5,21 +5,92 @@
   height: 430px;
 }
 
-.top-screen {
-  width: 1150px;
-  height: 600px;
-  box-shadow: 12px 14px 16px 13px rgba(0, 0, 0, 0.642) inset, -15px 10px 12px 13px #ffffff3b inset, 12px 14px 16px 13px rgba(0, 0, 0, 0.642) inset;
-  background: linear-gradient(145deg, #828282 0%, #303030 100%);
+.top-screen-margin {
+  padding: 3px 3px 0 3px;
+  background: #303030;
+  width: fit-content;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  border: #828282 2px solid;
-  gap: 8%;
 
-  .ds-frame {
-    padding: 20px;
-    border: #656565 2px solid;
-    background: linear-gradient(145deg, rgba(91,91,91,1) 0%, rgba(30,30,30,1) 100%);
-    width: fit-content;
+  .points {
+    min-width: 80px;
+    min-height: 50px;
+    background: transparent;
+    background-image: radial-gradient(rgba(48,48,48,1) 5px, rgb(84, 84, 84) 6px, transparent 8px);
+    background-size: 30px 30px;
+    background-position: -8px -8px;
+  }
+
+  .square {
+
+    &.top {
+      top: 8%;
+      width: 30px;
+      height: 30px;
+
+      &.left {
+        left: 11%;
+        background: #6A6A6A;
+      }
+
+      &.right {
+        right: 11%;
+        background: #4C4C4C;
+      }
+    }
+
+    &.bottom {
+      bottom: 8%;
+      width: 30px;
+      height: 30px;
+
+      &.left {
+        left: 11%;
+        background: #3E3E3E;
+      }
+
+      &.right {
+        right: 11%;
+        background: #292929;
+      }
+    }
+  }
+
+  .pad {
+    top: 10%;
+    width: 13px;
+    height: 60px;
+    background: #4D4D4D;
+
+    &.right {
+      right: 6px;
+      transform: skewY(339deg);
+      box-shadow: -2px -1px 4px 0px rgba(0, 0, 0, 0.642) inset;
+    }
+
+    &.left {
+      left: 6px;
+      transform: skewY(21deg);
+      box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.642) inset;
+    }
+  }
+
+  .top-screen {
+    width: 1150px;
+    height: 600px;
+    box-shadow: 12px 14px 16px 13px rgba(0, 0, 0, 0.642) inset, -15px 10px 12px 13px #ffffff3b inset, 12px 14px 16px 13px rgba(0, 0, 0, 0.642) inset;
+    background: linear-gradient(145deg, #828282 0%, #303030 100%);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border: #828282 2px solid;
+    gap: 8%;
+  
+    .ds-frame {
+      padding: 20px;
+      border: #656565 2px solid;
+      background: linear-gradient(145deg, rgba(91,91,91,1) 0%, rgba(30,30,30,1) 100%);
+      width: fit-content;
+    }
   }
 }
 
