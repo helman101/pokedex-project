@@ -14,7 +14,11 @@ export const App = () => {
   return (
     <main className='game-font'>
       <section>
-        <PokemonInfo />
+        <div className='top-screen d-flex justify-content-center align-items-center border-bottom-0'>
+          <div className="ds-frame rounded-3">
+            <PokemonInfo />
+          </div>
+        </div>
       </section>
       <section>
         <PokemonList
