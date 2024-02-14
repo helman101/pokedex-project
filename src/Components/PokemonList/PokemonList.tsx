@@ -47,7 +47,7 @@ export const PokemonList = ({ list, loading }: Props) => {
       listRef.current?.scrollTo({ top: 0 })
       setCurrentPokemon({ name: list[0].name })
     }
-  }, [loadingPokemonList, list])
+  }, [loadingPokemonList])
 
   return (
     <div className='w-100 d-flex justify-content-center'>
