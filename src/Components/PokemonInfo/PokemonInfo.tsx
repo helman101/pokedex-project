@@ -21,7 +21,7 @@ export const PokemonInfo = () => {
       void getPokemonInfo(currentPokemon.name)
         .then((res: CurrentPokemon) => { setCurrentPokemon(res) })
     }
-  }, [currentPokemon.id])
+  }, [currentPokemon.name])
 
   return (
     <div className='w-100 d-flex justify-content-center'>
@@ -44,7 +44,7 @@ export const PokemonInfo = () => {
                     )}
               </div>
             </div>
-            <div className='col ps-0 pe-3'>
+            <div className='col'>
               <div className={`${styles.stats} d-flex flex-column justify-content-center align-items-center border border-white rounded px-4 py-3`}>
                 {loadingCurrentPokemonData
                   ? <Loader color='white' />
@@ -62,8 +62,8 @@ export const PokemonInfo = () => {
                               <td className='text-end'>{currentPokemon.id}</td>
                             </tr>
                             <tr>
-                              <th>Types</th>
-                              <td className='d-flex justify-content-end flex-wrap' style={{ gap: '0.1rem' }}>
+                              <th style={{ verticalAlign: 'middle' }}><span>Types</span></th>
+                              <td className='d-flex justify-content-end flex-wrap' style={{ gap: '0.2rem' }}>
                                 {currentPokemon.types?.map(
                                   (type: string, i: number) => (
                                     <div className={styles.typeImage} key={i} style={{ backgroundImage: `url(${PokemonTypes})`, ...getTypeImagePosition[type.toLocaleLowerCase()] }} />
