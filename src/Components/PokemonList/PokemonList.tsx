@@ -51,26 +51,28 @@ export const PokemonList = ({ list, loading }: Props) => {
 
   return (
     <div className='w-100 d-flex justify-content-center'>
-      <div className={`row screen ${styles.pokemonList} rounded`}>
-        <div
-          className={`col-6 ${styles.pokemonCol} pt-2 d-flex flex-column align-items-center position-relative`}
-          onScroll={listScroll}
-          ref={listRef}
-        >
-            {loading && <Loader color='orange' />}
-            {!loading &&
-              list.map((item: ItemFromList, i: number) =>
-                <PokemonButton
-                  key={i}
-                  id={i + 1}
-                  onClick={() => { setCurrentPokemon({ name: item.name }) } }
-                  pokemon={item}
-                  selected={ currentPokemon.name === item.name }/>
-              )}
-            {loadingInfinityScroll && <Loader color='orange' />}
-        </div>
-        <div className='col'>
-          <Filters />
+      <div className='screen d-flex align-items-center justify-content-center'>
+        <div className={`h-100 w-100 row ${styles.pokemonList} rounded`}>
+          <div
+            className={`col-6 ${styles.pokemonCol} pt-2 d-flex flex-column align-items-center position-relative`}
+            onScroll={listScroll}
+            ref={listRef}
+          >
+              {loading && <Loader color='orange' />}
+              {!loading &&
+                list.map((item: ItemFromList, i: number) =>
+                  <PokemonButton
+                    key={i}
+                    id={i + 1}
+                    onClick={() => { setCurrentPokemon({ name: item.name }) } }
+                    pokemon={item}
+                    selected={ currentPokemon.name === item.name }/>
+                )}
+              {loadingInfinityScroll && <Loader color='orange' />}
+          </div>
+          <div className='col'>
+            <Filters />
+          </div>
         </div>
       </div>
     </div>
