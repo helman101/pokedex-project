@@ -1,7 +1,7 @@
 @import './assets/styles/palette.scss';
 
 .screen {
-  width: 600px;
+  width: 550px;
   height: 430px;
 }
 
@@ -29,12 +29,12 @@
       height: 30px;
 
       &.left {
-        left: 11%;
+        left: 13%;
         background: #6A6A6A;
       }
 
       &.right {
-        right: 11%;
+        right: 13%;
         background: #4C4C4C;
       }
     }
@@ -45,12 +45,12 @@
       height: 30px;
 
       &.left {
-        left: 11%;
+        left: 13%;
         background: #3E3E3E;
       }
 
       &.right {
-        right: 11%;
+        right: 13%;
         background: #292929;
       }
     }
@@ -78,7 +78,10 @@
   .top-screen {
     width: 1150px;
     height: 600px;
-    box-shadow: 12px 14px 16px 13px rgba(0, 0, 0, 0.642) inset, -15px 10px 12px 13px #ffffff3b inset, 12px 14px 16px 13px rgba(0, 0, 0, 0.642) inset;
+    box-shadow:
+      12px 14px 16px 13px rgba(0, 0, 0, 0.642) inset,
+      -15px 10px 12px 13px #ffffff3b inset,
+      12px 14px 16px 13px rgba(0, 0, 0, 0.642) inset;
     background: linear-gradient(145deg, #828282 0%, #303030 100%);
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
