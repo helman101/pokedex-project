@@ -45,7 +45,9 @@ export const PokemonList = ({ list, loading }: Props) => {
   useEffect(() => {
     if (!loadingPokemonList && list.length > 0) {
       listRef.current?.scrollTo({ top: 0 })
-      setCurrentPokemon({ name: list[0].name })
+      if (currentPokemon.name !== list[0].name) {
+        setCurrentPokemon({ name: list[0].name })
+      }
     }
   }, [loadingPokemonList])
 
