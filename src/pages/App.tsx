@@ -5,7 +5,7 @@ import { Bottom } from '../Components/Bottom/Bottom'
 
 export const App = () => {
   return (
-    <main className='game-font'>
+    <main className='game-font p-1'>
       <TopScreen />
       <Middle />
       <Bottom />
