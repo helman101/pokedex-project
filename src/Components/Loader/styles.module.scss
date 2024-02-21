@@ -13,9 +13,8 @@
 
   &.orange {
     border: 5px solid $orange;
+    border-right-color: transparent;
   }
-
-  border-right-color: transparent;
 }
 
 @keyframes loading {
