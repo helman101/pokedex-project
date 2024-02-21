@@ -13,12 +13,12 @@ export const FiltersRadio = ({ isCheck, filterName, onChange }: Props) => {
     <div className="form-check ps-0">
       <input
         type="radio"
-        className={`form-check-input ${styles.pokeRadio}`}
+        className={`form-check-input ${styles.pokeRadio} d-none`}
         name='filters'
         id={`${filterName}Filter`}
         onChange={onChange}
       />
-      <label htmlFor={`${filterName}Filter`} className='d-flex align-items-baseline'>
+      <label htmlFor={`${filterName}Filter`} className='d-flex align-items-baseline' style={{ cursor: 'pointer' }}>
         <img
           className='me-1'
           src={isCheck ? pokeballChecked : pokeball}

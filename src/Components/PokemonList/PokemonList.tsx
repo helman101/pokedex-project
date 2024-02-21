@@ -26,17 +26,21 @@ export const PokemonList = ({ list, loading }: Props) => {
 
   const listRef = useRef<HTMLInputElement>(null)
 
+  const pokeFromUrl = async (url: string) => {
+    const res = await getPokemonListFromUrl(url)
+    if (res) {
+      setPokemonList(true, res.results)
+      setNextListUrl(res.next)
+    }
+  }
+
   const listScroll = () => {
     if (listRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listRef.current
       if (scrollTop + clientHeight >= scrollHeight) {
         if (nextListUrl) {
           setLoadingInfinityScroll()
-          void getPokemonListFromUrl(nextListUrl)
-            .then((res: { results: ItemFromList[], next: string }) => {
-              setPokemonList(true, res.results)
-              setNextListUrl(res.next)
-            })
+          void pokeFromUrl(nextListUrl)
         }
       }
     }
@@ -45,29 +49,31 @@ export const PokemonList = ({ list, loading }: Props) => {
   useEffect(() => {
     if (!loadingPokemonList && list.length > 0) {
       listRef.current?.scrollTo({ top: 0 })
-      setCurrentPokemon({ name: list[0].name })
+      if (currentPokemon.name !== list[0].name) {
+        setCurrentPokemon({ name: list[0].name })
+      }
     }
-  }, [loadingPokemonList, list])
+  }, [loadingPokemonList])
 
   return (
-    <div className='w-100 d-flex justify-content-center'>
-      <div className={`row screen ${styles.pokemonList} rounded`}>
+    <div className='screen d-flex align-items-center justify-content-center'>
+      <div className={`h-100 w-100 row ${styles.pokemonList} rounded`}>
         <div
           className={`col-6 ${styles.pokemonCol} pt-2 d-flex flex-column align-items-center position-relative`}
           onScroll={listScroll}
           ref={listRef}
         >
-            {loading && <Loader />}
-            {!loading &&
-              list.map((item: ItemFromList, i: number) =>
-                <PokemonButton
-                  key={i}
-                  id={i + 1}
-                  onClick={() => { setCurrentPokemon({ name: item.name }) } }
-                  pokemon={item}
-                  selected={ currentPokemon.name === item.name }/>
-              )}
-            {loadingInfinityScroll && <Loader />}
+          {loading && <Loader color='orange' />}
+          {!loading &&
+            list.map((item: ItemFromList, i: number) =>
+              <PokemonButton
+                key={i}
+                id={i + 1}
+                onClick={() => { setCurrentPokemon({ name: item.name }) } }
+                pokemon={item}
+                selected={ currentPokemon.name === item.name }/>
+            )}
+          {loadingInfinityScroll && <Loader color='orange' />}
         </div>
         <div className='col'>
           <Filters />
