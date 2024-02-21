@@ -1,11 +1,12 @@
 import { type ChangeEvent, useEffect, useContext } from 'react'
 import { getFirstPokemonList, getPokemonGenerationList, getPokemonListByGen, getPokemonListByType, getPokemonTypeList } from '../../services/pokeApi'
 import { FiltersRadio } from './FiltersRadio'
-import { FiltersEnum } from '../../hooks/FilterStore/types.d'
+import { type FilterListItem, FiltersEnum } from '../../hooks/FilterStore/types.d'
 import { type ItemFromList, type usePokeStoreI } from '../../hooks/PokeStore/types'
 import { PokeContext } from '../../Context/PokeContext'
 import { useFilterStore } from '../../hooks/FilterStore/useFilterStore'
 import styles from './styles.module.scss'
+import { type ApiListResponse } from '../../services/types'
 
 export const Filters = () => {
   const {
@@ -29,36 +30,44 @@ export const Filters = () => {
 
   const getPokemonList = async () => {
     setLoadingPokemonList()
-    await getFirstPokemonList()
-      .then((res: { results: ItemFromList[], next: string }) => {
-        setPokemonList(false, res.results)
-        setNextListUrl(res.next)
-      })
+    const res: ApiListResponse | undefined = await getFirstPokemonList()
+    if (res) {
+      setPokemonList(false, res.results)
+      setNextListUrl(res.next)
+    }
   }
 
   const getPokemonByType = async () => {
     setLoadingPokemonList()
-    await getPokemonListByType(typeFilter)
-      .then((res: ItemFromList[]) => {
-        setPokemonList(false, res)
-        setNextListUrl(undefined)
-      })
+    const res: ItemFromList[] | undefined = await getPokemonListByType(typeFilter)
+    if (res) {
+      setPokemonList(false, res)
+      setNextListUrl(undefined)
+    }
   }
 
   const getPokemonByGen = async () => {
     setLoadingPokemonList()
-    await getPokemonListByGen(genFilter)
-      .then((res: ItemFromList[]) => {
-        setPokemonList(false, res)
-        setNextListUrl(undefined)
-      })
+    const res: ItemFromList[] | undefined = await getPokemonListByGen(genFilter)
+    if (res) {
+      setPokemonList(false, res)
+      setNextListUrl(undefined)
+    }
+  }
+
+  const getTypeList = async () => {
+    const list: FilterListItem[] | undefined = await getPokemonTypeList()
+    if (list) setTypeList(list)
+  }
+
+  const getGenList = async () => {
+    const list: FilterListItem[] | undefined = await getPokemonGenerationList()
+    if (list) setGenList(list)
   }
 
   useEffect(() => {
-    void getPokemonTypeList()
-      .then((res: Array<{ value: string, name: string }>) => { setTypeList(res) })
-    void getPokemonGenerationList()
-      .then((res: Array<{ value: string, name: string }>) => { setGenList(res) })
+    void getTypeList()
+    void getGenList()
   }, [])
 
   useEffect(() => {

@@ -26,17 +26,21 @@ export const PokemonList = ({ list, loading }: Props) => {
 
   const listRef = useRef<HTMLInputElement>(null)
 
+  const pokeFromUrl = async (url: string) => {
+    const res = await getPokemonListFromUrl(url)
+    if (res) {
+      setPokemonList(true, res.results)
+      setNextListUrl(res.next)
+    }
+  }
+
   const listScroll = () => {
     if (listRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listRef.current
       if (scrollTop + clientHeight >= scrollHeight) {
         if (nextListUrl) {
           setLoadingInfinityScroll()
-          void getPokemonListFromUrl(nextListUrl)
-            .then((res: { results: ItemFromList[], next: string }) => {
-              setPokemonList(true, res.results)
-              setNextListUrl(res.next)
-            })
+          void pokeFromUrl(nextListUrl)
         }
       }
     }
