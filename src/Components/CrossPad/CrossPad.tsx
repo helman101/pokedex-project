@@ -1,13 +1,21 @@
-import React from 'react'
+import {
+  crossWrapper,
+  cross,
+  crossLine,
+  lineTop,
+  lineRight,
+  lineLeft,
+  lineBottom
+} from './style.module.scss'
 
 export const CrossPad = () => {
   return (
-    <div className="cross-wrapper position-absolute">
-      <div className="cross rounded">
-        <div className="cross-line top position-absolute" />
-        <div className="cross-line right position-absolute" />
-        <div className="cross-line bottom position-absolute" />
-        <div className="cross-line left position-absolute" />
+    <div className={`${crossWrapper} position-absolute`}>
+      <div className={`${cross} rounded`}>
+        <div className={`${crossLine} ${lineTop} position-absolute`} />
+        <div className={`${crossLine} ${lineRight} position-absolute`} />
+        <div className={`${crossLine} ${lineBottom} position-absolute`} />
+        <div className={`${crossLine} ${lineLeft} position-absolute`} />
       </div>
     </div>
   )

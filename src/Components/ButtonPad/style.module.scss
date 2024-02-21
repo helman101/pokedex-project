@@ -1,0 +1,37 @@
+.buttonWrapper {
+  right: 4%;
+  top: 25%;
+  width: 170px;
+  height: 170px;
+  
+
+  .btn {
+    width: 50px;
+    height: 50px;
+    background: #1D1D1D;
+    border: black 3px solid;
+    box-shadow: -1px -1px 3px 0px white;
+    color: white;
+    font-family: monospace;
+    font-size: 1.3rem;
+    
+    &.btnTop {
+      left: 35%;
+    }
+
+    &.btnRight {
+      top: 35%;
+      right: 0%;
+    }
+
+    &.btnBottom {
+      left: 35%;
+      bottom: 0%;
+    }
+
+    &.btnLeft {
+      top: 35%;
+      left: 0%;
+    }
+  }
+}

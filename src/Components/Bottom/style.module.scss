@@ -1,0 +1,34 @@
+.bottomScreenMargin {
+  padding: 0 3px 3px 3px;
+  background: #303030;
+  width: fit-content;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+
+  .bottomScreen {
+    width: 1150px;
+    height: 600px;
+    box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.642) inset;
+    background: linear-gradient(145deg, #2A2A2A 0%, #424244 100%);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: #828282 2px solid;
+
+    .frameWrapper {
+      box-shadow:
+        -19px -20px 20px 8px rgba(0, 0, 0, 0.65) inset,
+        20px -9px 20px 0px rgba(255, 255, 255, 0.554) inset,
+        4px 3px 8px 6px rgba(0, 0, 0, 0.65),
+        -5px 0px 7px 1px rgba(255, 255, 255, 0.554);
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+
+      .dsFrame {
+        padding: 20px;
+        border: #424244 2px solid;
+        background: linear-gradient(145deg, #2D2D2D 0%, #151515 100%);
+        width: fit-content;
+      }
+    }
+  }
+}

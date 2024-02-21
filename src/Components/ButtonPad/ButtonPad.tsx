@@ -1,20 +1,27 @@
-import React from 'react'
+import styles, {
+  buttonWrapper,
+  btn
+} from './style.module.scss'
 
 export const ButtonPad = () => {
   return (
-    <div className="button-wrapper position-absolute">
-      <div className="btn top rounded-circle position-absolute p-0 d-flex align-items-center justify-content-center">
-        Y
-      </div>
-      <div className="btn right rounded-circle position-absolute p-0 d-flex align-items-center justify-content-center">
-        X
-      </div>
-      <div className="btn bottom rounded-circle position-absolute p-0 d-flex align-items-center justify-content-center">
-        B
-      </div>
-      <div className="btn left rounded-circle position-absolute p-0 d-flex align-items-center justify-content-center">
-        A
-      </div>
+    <div className={`${buttonWrapper} position-absolute`}>
+      <Btn position='Top' text='X' />
+      <Btn position='Right' text='A' />
+      <Btn position='Bottom' text='B' />
+      <Btn position='Left' text='Y' />
+    </div>
+  )
+}
+
+export const Btn = ({ position, text }: { position: string, text: string }) => {
+  return (
+    <div
+      className={
+      `${btn} ${styles['btn' + position]} rounded-circle position-absolute p-0 d-flex align-items-center justify-content-center`
+      }
+    >
+      {text}
     </div>
   )
 }
