@@ -1,97 +1,144 @@
-import { type ItemFromList } from '../hooks/PokeStore/types'
+import { type CurrentPokemon, type ItemFromList } from '../hooks/PokeStore/types'
 import { BASE_POKE_URL } from './constants'
 import { type ApiListResponse } from './types'
+
+const client = async (url: string) => {
+  try {
+    const raw = await fetch(url)
+    const res = await raw.json()
+    return res
+  } catch (err: unknown) {
+    if (err instanceof ErrorEvent) {
+      throw new Error(err.message)
+    }
+  }
+}
 
 // Gets first list of pokemon by pokedex order
 export const getFirstPokemonList = async () => {
   const query = `${BASE_POKE_URL}pokemon`
-  const list = await fetch(query)
-    .then(async (res) => await res.json())
-    .then((res: ApiListResponse) => res)
 
-  return list
+  try {
+    const list: ApiListResponse = await client(query)
+    return list
+  } catch (err: unknown) {
+    if (err instanceof ErrorEvent) {
+      throw new Error(err.message)
+    }
+  }
 }
 
 // Gets a list of pokemon using the saved nextUrl on store
 export const getPokemonListFromUrl = async (url: string) => {
-  const list = await fetch(url)
-    .then(async (res) => await res.json())
-    .then((res: ApiListResponse) => res)
-
-  return list
+  try {
+    const list: ApiListResponse = await client(url)
+    return list
+  } catch (err: unknown) {
+    if (err instanceof ErrorEvent) {
+      throw new Error(err.message)
+    }
+  }
 }
 
 // Gets all info of a selected pokemon
 export const getPokemonInfo = async (pokemonName: string) => {
-  const info = await fetch(`${BASE_POKE_URL}pokemon/${pokemonName}`)
-    .then(async (res) => await res.json())
-    .then((res) => {
-      return {
-        id: res.id,
-        name: res.name,
-        height: res.height,
-        weight: res.weight,
-        types: res.types.map((obj: { type: ItemFromList }) => obj.type.name.charAt(0).toLocaleUpperCase() + obj.type.name.slice(1)),
-        stats: res.stats.map((obj: { stat: ItemFromList, base_stat: number }) => ({ name: obj.stat.name, baseStat: obj.base_stat })),
-        sprites: {
-          backDefault: res.sprites.back_default,
-          backShiny: res.sprites.back_shiny,
-          frontDefault: res.sprites.front_default,
-          frontShiny: res.sprites.front_shiny
-        }
-      }
-    })
+  const query = `${BASE_POKE_URL}pokemon/${pokemonName}`
 
-  return info
+  try {
+    const info = await client(query)
+    const renameInfo: CurrentPokemon = {
+      id: info.id,
+      name: info.name,
+      height: info.height,
+      weight: info.weight,
+      types: info.types.map((obj: { type: ItemFromList }) => obj.type.name.charAt(0).toLocaleUpperCase() + obj.type.name.slice(1)),
+      stats: info.stats.map((obj: { stat: ItemFromList, base_stat: number }) => ({ name: obj.stat.name, baseStat: obj.base_stat })),
+      sprites: {
+        backDefault: info.sprites.back_default,
+        backShiny: info.sprites.back_shiny,
+        frontDefault: info.sprites.front_default,
+        frontShiny: info.sprites.front_shiny
+      }
+    }
+    return renameInfo
+  } catch (err: unknown) {
+    if (err instanceof ErrorEvent) {
+      throw new Error(err.message)
+    }
+  }
 }
 
 // Gets the list of pokemon types
 export const getPokemonTypeList = async () => {
-  const types = await fetch(`${BASE_POKE_URL}type`)
-    .then(async (res) => await res.json())
-    .then((res) => res.results)
+  const query = `${BASE_POKE_URL}type`
 
-  // Maps through array generating an array of objects containing a name and a value
-  const result = types.map(
-    (type: ItemFromList) => (
-      {
-        name: type.name.charAt(0).toLocaleUpperCase() + type.name.slice(1),
-        value: type.name
-      }))
-    .slice(0, -2)
+  try {
+    const types = await client(query)
 
-  return result
+    // Maps through array generating an array of objects containing a name and a value
+    const mappedTypes = types.results.map(
+      (type: ItemFromList) => (
+        {
+          name: type.name.charAt(0).toLocaleUpperCase() + type.name.slice(1),
+          value: type.name
+        }))
+      .slice(0, -2)
+
+    return mappedTypes
+  } catch (err: unknown) {
+    if (err instanceof ErrorEvent) {
+      throw new Error(err.message)
+    }
+  }
 }
 
 // Gets a list of pokemon generations
 export const getPokemonGenerationList = async () => {
-  const gens = await fetch(`${BASE_POKE_URL}generation`)
-    .then(async (res) => await res.json())
-    .then((res) => res.results)
+  const query = `${BASE_POKE_URL}generation`
 
-  // Maps through array generating an array of objects containing a name and a value
-  const result = gens.map((gen: ItemFromList, i: number) => ({ name: `Gen ${i + 1}`, value: gen.name }))
+  try {
+    const gens = await client(query)
 
-  return result
+    // Maps through array generating an array of objects containing a name and a value
+    const mappedGens = gens.results.map(
+      (gen: ItemFromList, i: number) => (
+        { name: `Gen ${i + 1}`, value: gen.name }
+      )
+    )
+    return mappedGens
+  } catch (err: unknown) {
+    if (err instanceof ErrorEvent) {
+      throw new Error(err.message)
+    }
+  }
 }
 
 // Gets a list of pokemon by generation
 export const getPokemonListByGen = async (gen: string) => {
-  const pokeList = await fetch(`${BASE_POKE_URL}generation/${gen}`)
-    .then(async (res) => await res.json())
-    .then((res) => res.pokemon_species)
+  const query = `${BASE_POKE_URL}generation/${gen}`
 
-  return pokeList
+  try {
+    const pokeList = await client(query)
+    return pokeList.pokemon_species
+  } catch (err: unknown) {
+    if (err instanceof ErrorEvent) {
+      throw new Error(err.message)
+    }
+  }
 }
 
 // Gets a list of pokemon by type
 export const getPokemonListByType = async (type: string) => {
-  const pokeList = await fetch(`${BASE_POKE_URL}type/${type}`)
-    .then(async (res) => await res.json())
-    .then((res) => res.pokemon)
+  const query = `${BASE_POKE_URL}type/${type}`
 
-  // Maps through array taking only the object (pokemon) containing name and url of the pokemon
-  const result = pokeList.map((item: { pokemon: ItemFromList }) => item.pokemon)
-
-  return result
+  try {
+    const pokeList = await client(query)
+    // Maps through array taking only the object (pokemon) containing name and url of the pokemon
+    const mappedList = pokeList.pokemon.map((item: { pokemon: ItemFromList }) => item.pokemon)
+    return mappedList
+  } catch (err: unknown) {
+    if (err instanceof ErrorEvent) {
+      throw new Error(err.message)
+    }
+  }
 }
