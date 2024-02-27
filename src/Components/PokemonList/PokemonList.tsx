@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { type ItemFromList } from '../../hooks/PokeStore/types'
 import { PokemonButton } from '../PokemonButton/PokemonButton'
 import { PokeContext } from '../../Context/PokeContext'
-import { getPokemonListFromUrl } from '../../services/pokeApi'
+import { usePokeApi } from '../../services/pokeApi'
 import { Loader } from '../Loader/Loader'
 import { Filters } from '../Filters/Filters'
 import styles from './style.module.scss'
@@ -19,20 +19,14 @@ export const PokemonList = ({ list, loading }: Props) => {
     currentPokemon,
     nextListUrl,
     setCurrentPokemon,
-    setPokemonList,
-    setNextListUrl,
     setLoadingInfinityScroll
   } = useContext(PokeContext)
 
-  const listRef = useRef<HTMLInputElement>(null)
+  const {
+    getPokemonListFromUrl
+  } = usePokeApi()
 
-  const pokeFromUrl = async (url: string) => {
-    const res = await getPokemonListFromUrl(url)
-    if (res) {
-      setPokemonList(true, res.results)
-      setNextListUrl(res.next)
-    }
-  }
+  const listRef = useRef<HTMLInputElement>(null)
 
   const listScroll = () => {
     if (listRef.current) {
@@ -40,7 +34,7 @@ export const PokemonList = ({ list, loading }: Props) => {
       if (scrollTop + clientHeight >= scrollHeight) {
         if (nextListUrl) {
           setLoadingInfinityScroll()
-          void pokeFromUrl(nextListUrl)
+          void getPokemonListFromUrl(nextListUrl)
         }
       }
     }

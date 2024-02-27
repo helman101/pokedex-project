@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { getPokemonInfo } from '../../services/pokeApi'
+import { usePokeApi } from '../../services/pokeApi'
 import { type usePokeStoreI } from '../../hooks/PokeStore/types'
 import { PokeContext } from '../../Context/PokeContext'
 import { Loader } from '../Loader/Loader'
@@ -10,20 +10,14 @@ import { getTypeImagePosition } from './constants'
 export const PokemonInfo = () => {
   const {
     loadingCurrentPokemonData,
-    currentPokemon,
-    setCurrentPokemon,
-    setLoadingCurrentPokemonData
+    currentPokemon
   } = useContext<usePokeStoreI>(PokeContext)
 
-  const getInfo = async (name: string) => {
-    const res = await getPokemonInfo(name)
-    if (res) setCurrentPokemon(res)
-  }
+  const { getPokemonInfo } = usePokeApi()
 
   useEffect(() => {
     if (currentPokemon.name) {
-      setLoadingCurrentPokemonData()
-      void getInfo(currentPokemon.name)
+      void getPokemonInfo(currentPokemon.name)
     }
   }, [currentPokemon.name])
 
