@@ -1,12 +1,9 @@
-import { type ChangeEvent, useEffect, useContext } from 'react'
-import { getFirstPokemonList, getPokemonGenerationList, getPokemonListByGen, getPokemonListByType, getPokemonTypeList } from '../../services/pokeApi'
+import { type ChangeEvent, useEffect } from 'react'
+import { usePokeApi } from '../../services/pokeApi'
 import { FiltersRadio } from './FiltersRadio'
-import { type FilterListItem, FiltersEnum } from '../../hooks/FilterStore/types.d'
-import { type ItemFromList, type usePokeStoreI } from '../../hooks/PokeStore/types'
-import { PokeContext } from '../../Context/PokeContext'
+import { FiltersEnum } from '../../hooks/FilterStore/types.d'
 import { useFilterStore } from '../../hooks/FilterStore/useFilterStore'
 import styles from './styles.module.scss'
-import { type ApiListResponse } from '../../services/types'
 
 export const Filters = () => {
   const {
@@ -15,53 +12,28 @@ export const Filters = () => {
     typeList,
     genList,
     checkedFilter,
-    setTypeList,
-    setGenList,
     setGenFilter,
     setTypeFilter,
-    setCheckedFilter
+    setCheckedFilter,
+    setGenList,
+    setTypeList
   } = useFilterStore()
 
   const {
-    setLoadingPokemonList,
-    setPokemonList,
-    setNextListUrl
-  } = useContext<usePokeStoreI>(PokeContext)
-
-  const getPokemonList = async () => {
-    setLoadingPokemonList()
-    const res: ApiListResponse | undefined = await getFirstPokemonList()
-    if (res) {
-      setPokemonList(false, res.results)
-      setNextListUrl(res.next)
-    }
-  }
-
-  const getPokemonByType = async () => {
-    setLoadingPokemonList()
-    const res: ItemFromList[] | undefined = await getPokemonListByType(typeFilter)
-    if (res) {
-      setPokemonList(false, res)
-      setNextListUrl(undefined)
-    }
-  }
-
-  const getPokemonByGen = async () => {
-    setLoadingPokemonList()
-    const res: ItemFromList[] | undefined = await getPokemonListByGen(genFilter)
-    if (res) {
-      setPokemonList(false, res)
-      setNextListUrl(undefined)
-    }
-  }
+    getFirstPokemonList,
+    getPokemonGenerationList,
+    getPokemonTypeList,
+    getPokemonListByGen,
+    getPokemonListByType
+  } = usePokeApi()
 
   const getTypeList = async () => {
-    const list: FilterListItem[] | undefined = await getPokemonTypeList()
+    const list = await getPokemonTypeList()
     if (list) setTypeList(list)
   }
 
   const getGenList = async () => {
-    const list: FilterListItem[] | undefined = await getPokemonGenerationList()
+    const list = await getPokemonGenerationList()
     if (list) setGenList(list)
   }
 
@@ -72,13 +44,13 @@ export const Filters = () => {
 
   useEffect(() => {
     if (checkedFilter === FiltersEnum.all) {
-      void getPokemonList()
+      void getFirstPokemonList()
     }
     if (checkedFilter === FiltersEnum.generation) {
-      void getPokemonByGen()
+      void getPokemonListByGen(genFilter)
     }
     if (checkedFilter === FiltersEnum.type) {
-      void getPokemonByType()
+      void getPokemonListByType(typeFilter)
     }
   }, [checkedFilter, typeFilter, genFilter])
 
