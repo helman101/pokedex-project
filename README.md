@@ -1,4 +1,4 @@
-# Nintendo DSLite - Pokedex
+# Nintendo DSLite ~ Pokedex
 
 ![](screenshot.png)
 
