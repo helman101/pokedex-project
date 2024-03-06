@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { App } from './pages/App'
-import '../style.scss'
+import './style.scss'
 import { PokeProvider } from './Context/PokeContext'
 import { StrictMode } from 'react'
 
